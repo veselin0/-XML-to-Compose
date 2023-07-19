@@ -24,8 +24,11 @@ class MainActivity : ComponentActivity() {
                 ) {
 //                    Greeting("Android")
 
-                    NewFrameLayout()
+//                    NewFrameLayout()
+
+                    NewLinearLayout()
                 }
+
             }
         }
     }
