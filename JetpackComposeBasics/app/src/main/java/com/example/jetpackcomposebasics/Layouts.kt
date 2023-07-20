@@ -26,7 +26,7 @@ private fun LayoutPreview() {
 
 @Composable
 fun NewConstraintLayout() {
-    ConstraintLayout {
+    /*ConstraintLayout {
         val (normA, normF, filledF, container) = createRefs()
 
         Text(
@@ -40,6 +40,34 @@ fun NewConstraintLayout() {
         })
         Row(modifier = Modifier.constrainAs(container){
             top.linkTo(normF.bottom)
+        }) {
+            TextANT()
+            TextFro()
+        }
+    }*/
+    ConstraintLayout {
+        val (normA, normF, filledF, container) = createRefs()
+
+        Text(
+            text = "ANT Android Courses",
+            modifier = Modifier.constrainAs(normA) {
+                top.linkTo(parent.top)
+                bottom.linkTo(parent.bottom)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+            })
+        Text(text = "Frogames",
+            modifier = Modifier.constrainAs(normF) {
+                top.linkTo(normA.bottom)
+                start.linkTo(normA.start)
+            })
+        TextFro(modifier = Modifier.constrainAs(filledF) {
+            top.linkTo(normF.top)
+            start.linkTo(normF.end)
+        })
+        Row(modifier = Modifier.constrainAs(container) {
+            top.linkTo(normF.bottom)
+            start.linkTo(normA.start)
         }) {
             TextANT()
             TextFro()
