@@ -87,18 +87,18 @@ fun NewLinearLayout() {
 //        }
 //    }
 
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        TextFro()
-        Column {
-            TextANT()
-            TextANT()
-            TextFro()
-            Row {
-                TextANT()
-                TextFro()
-            }
-        }
-    }
+//    Row(verticalAlignment = Alignment.CenterVertically) {
+//        TextFro()
+//        Column {
+//            TextANT()
+//            TextANT()
+//            TextFro()
+//            Row {
+//                TextANT()
+//                TextFro()
+//            }
+//        }
+//    }
 }
 
 @Composable
