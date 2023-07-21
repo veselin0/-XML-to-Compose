@@ -14,7 +14,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 
 
-@Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun LayoutPreview() {
 //    NewFrameLayout()
@@ -75,6 +74,7 @@ fun NewConstraintLayout() {
     }
 }
 
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun NewLinearLayout() {
 //    Column(horizontalAlignment = Alignment.End, verticalArrangement = Arrangement.Center) {
@@ -99,7 +99,37 @@ fun NewLinearLayout() {
 //            }
 //        }
 //    }
+
+    ConstraintLayout {
+        val (rowFro, colAnt0, colAnt1, colFro, row) = createRefs()
+        TextFro(modifier = Modifier.constrainAs(rowFro) {
+                start.linkTo(parent.start)
+                top.linkTo(parent.top)
+                bottom.linkTo(parent.bottom)
+            })
+        TextANT(modifier = Modifier.constrainAs(colAnt0) {
+                start.linkTo(rowFro.end)
+                bottom.linkTo(colAnt1.top)
+            })
+        TextANT(modifier = Modifier.constrainAs(colAnt1) {
+                start.linkTo(rowFro.end)
+                top.linkTo(parent.top)
+                bottom.linkTo(parent.bottom)
+            })
+        TextFro(modifier = Modifier.constrainAs(colFro) {
+                start.linkTo(rowFro.end)
+                top.linkTo(colAnt1.bottom)
+            })
+        Row(modifier = Modifier.constrainAs(row){
+            start.linkTo(colFro.start)
+            top.linkTo(colFro.bottom)
+        }) {
+                TextANT()
+                TextFro()
+            }
+    }
 }
+
 
 @Composable
 fun TextANT(modifier: Modifier = Modifier) {
