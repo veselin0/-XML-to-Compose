@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 
 
@@ -23,6 +24,7 @@ private fun LayoutPreview() {
     NewConstraintLayout()
 }
 
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun NewConstraintLayout() {
     /*ConstraintLayout {
@@ -44,27 +46,88 @@ fun NewConstraintLayout() {
             TextFro()
         }
     }*/
+//    ConstraintLayout {
+//        val (normA, normF, filledF, container) = createRefs()
+//
+//        Text(
+//            text = "ANT Android Courses",
+//            modifier = Modifier.constrainAs(normA) {
+//                top.linkTo(parent.top)
+//                bottom.linkTo(parent.bottom)
+//                start.linkTo(parent.start)
+//                end.linkTo(parent.end)
+//            })
+//        Text(text = "Frogames",
+//            modifier = Modifier.constrainAs(normF) {
+//                top.linkTo(normA.bottom)
+//                start.linkTo(normA.start)
+//            })
+//        TextFro(modifier = Modifier.constrainAs(filledF) {
+//            top.linkTo(normF.top)
+//            start.linkTo(normF.end)
+//        })
+//        Row(modifier = Modifier.constrainAs(container) {
+//            top.linkTo(normF.bottom)
+//            start.linkTo(normA.start)
+//        }) {
+//            TextANT()
+//            TextFro()
+//        }
+//    }
+
+//    Tarea 0 solution (segun profe):
+//    ConstraintLayout {
+//        val (normA, normF, filledF, container) = createRefs()
+//
+//        Text(
+//            text = "ANT Android Courses",
+//            modifier = Modifier.constrainAs(normA) {
+//                top.linkTo(parent.top)
+//                bottom.linkTo(parent.bottom)
+//                start.linkTo(filledF.end)
+//            })
+//        Text(text = "Frogames",
+//            modifier = Modifier.constrainAs(normF) {
+//                top.linkTo(normA.bottom)
+//                start.linkTo(filledF.end)
+//            })
+//        TextFro(modifier = Modifier.constrainAs(filledF) {
+//            top.linkTo(normF.top)
+//            start.linkTo(parent.start)
+//        })
+//        Column(modifier = Modifier.constrainAs(container) {
+//            top.linkTo(normF.bottom)
+//            start.linkTo(normA.start)
+//        }) {
+//            TextANT()
+//            TextFro()
+//        }
+//    }
+
     ConstraintLayout {
         val (normA, normF, filledF, container) = createRefs()
+
+        val startGuideline = createGuidelineFromStart(0.25f)
+        val endGuideline = createGuidelineFromEnd(0.5f)
+        val topGuideline = createGuidelineFromTop(16.dp)
+        val bottomGuideline = createGuidelineFromBottom(32.dp)
 
         Text(
             text = "ANT Android Courses",
             modifier = Modifier.constrainAs(normA) {
-                top.linkTo(parent.top)
-                bottom.linkTo(parent.bottom)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
+                top.linkTo(topGuideline)
+                start.linkTo(filledF.end)
             })
         Text(text = "Frogames",
             modifier = Modifier.constrainAs(normF) {
                 top.linkTo(normA.bottom)
-                start.linkTo(normA.start)
+                start.linkTo(filledF.end)
             })
         TextFro(modifier = Modifier.constrainAs(filledF) {
             top.linkTo(normF.top)
-            start.linkTo(normF.end)
+            start.linkTo(startGuideline)
         })
-        Row(modifier = Modifier.constrainAs(container) {
+        Column(modifier = Modifier.constrainAs(container) {
             top.linkTo(normF.bottom)
             start.linkTo(normA.start)
         }) {
@@ -74,7 +137,7 @@ fun NewConstraintLayout() {
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+
 @Composable
 fun NewLinearLayout() {
 //    Column(horizontalAlignment = Alignment.End, verticalArrangement = Arrangement.Center) {
