@@ -26,7 +26,9 @@ class MainActivity : ComponentActivity() {
 
 //                    NewFrameLayout()
 
-                    NewConstraintLayout()
+//                    NewSpacing()
+
+                    NewSize()
                 }
 
             }
