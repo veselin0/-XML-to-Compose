@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
 
 //                    NewSpacing()
 
-                    NewSize()
+                    NewClick()
                 }
 
             }

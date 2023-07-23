@@ -1,6 +1,7 @@
 package com.example.jetpackcomposebasics
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -23,7 +24,23 @@ import androidx.compose.ui.unit.dp
 @Composable
 private fun ModifierPreview() {
 //    NewSpacing()
-    NewSize()
+//    NewSize()
+    NewClick()
+}
+
+@Composable
+fun NewClick() {
+    Box(
+        modifier = Modifier
+            .padding(16.dp)
+            .background(Color.Gray)
+    ) {
+        TextFro(
+            modifier = Modifier
+                .size(width = 128.dp, height = 64.dp)
+                .padding(16.dp)
+                .clickable { })
+    }
 }
 
 @Composable
@@ -43,7 +60,11 @@ fun NewSize() {
 //            TextFro(Modifier.fillMaxWidth())
 //            TextFro(Modifier.fillMaxHeight())
 //            TextFro(Modifier.width(80.dp))
-            TextFro(Modifier.requiredWidth(80.dp).requiredHeight(40.dp))
+            TextFro(
+                Modifier
+                    .requiredWidth(80.dp)
+                    .requiredHeight(40.dp)
+            )
         }
         TextFro(Modifier.size(width = 128.dp, height = 64.dp))
     }
