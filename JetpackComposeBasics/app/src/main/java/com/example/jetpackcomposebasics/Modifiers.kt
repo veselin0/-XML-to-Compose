@@ -29,18 +29,26 @@ private fun ModifierPreview() {
 }
 
 @Composable
-fun NewClick() {
-    Box(
-        modifier = Modifier
-            .padding(16.dp)
-            .background(Color.Gray)
-    ) {
+fun StandardBox(modifier: Modifier = Modifier) {
+    Box(modifier = modifier)
+    {
         TextFro(
             modifier = Modifier
                 .size(width = 128.dp, height = 64.dp)
                 .padding(16.dp)
                 .clickable { })
     }
+}
+
+@Composable
+fun NewClick() {
+    StandardBox(
+        modifier = Modifier
+            .padding(36.dp)
+            .background(Color.Cyan)
+    )
+
+
 }
 
 @Composable
