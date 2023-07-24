@@ -30,7 +30,9 @@ class MainActivity : ComponentActivity() {
 
 //                    NewClick()
 
-                    NewTextView()
+//                    NewTextView()
+
+                    Components()
                 }
 
             }
