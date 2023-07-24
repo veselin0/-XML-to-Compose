@@ -8,9 +8,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -52,8 +58,20 @@ fun Components() {
         Column(Modifier.padding(8.dp)) {
             NewTextView()
             CustomDivider()
+            NewTextField()
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun NewTextField() {
+    var textValue by remember { mutableStateOf("Hi!") }
+
+    TextField(
+        value = textValue,
+        onValueChange = { textValue = it },
+        label = { Text(text = "Enter Data") })
 }
 
 @Composable
