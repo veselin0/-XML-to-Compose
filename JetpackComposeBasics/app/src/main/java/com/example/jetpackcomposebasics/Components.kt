@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -40,7 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.nio.file.WatchEvent
 
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, showSystemUi = true, locale = "bg")
 @Composable
 private fun ComponentsPreview() {
 //    NewTextView()
@@ -57,7 +58,8 @@ fun NewTextFieldOutlined() {
     OutlinedTextField(
         value = textValue,
         onValueChange = { textValue = it },
-        label = { Text(text = "Enter More Data") },
+        label = { Text(text = stringResource(id = R.string.moreData)) },
+        singleLine = true,
         modifier = Modifier.fillMaxWidth()
     )
 
