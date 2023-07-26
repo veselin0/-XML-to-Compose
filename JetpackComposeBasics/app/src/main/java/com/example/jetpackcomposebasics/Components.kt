@@ -1,14 +1,18 @@
 package com.example.jetpackcomposebasics
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -34,6 +38,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.nio.file.WatchEvent
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
@@ -52,15 +57,25 @@ fun NewTextFieldOutlined() {
     OutlinedTextField(
         value = textValue,
         onValueChange = { textValue = it },
-        label = { Text(text = "Enter More Data")},
-        modifier = Modifier.fillMaxWidth())
+        label = { Text(text = "Enter More Data") },
+        modifier = Modifier.fillMaxWidth()
+    )
 
     OutlinedTextField(
         value = passValue,
         onValueChange = { passValue = it },
-        label = { Text(text = "Enter Password")},
-        visualTransformation =  PasswordVisualTransformation(),
-        modifier = Modifier.fillMaxWidth())
+        label = { Text(text = "Enter Password") },
+        visualTransformation = PasswordVisualTransformation(),
+        trailingIcon = {
+            if (passValue.isNotEmpty()) {
+                Icon(
+                    imageVector = Icons.Filled.Clear,
+                    contentDescription = "Clear content icon",
+                    modifier = Modifier.clickable { passValue = "" })
+            }
+        },
+        modifier = Modifier.fillMaxWidth()
+    )
 }
 
 @Composable
@@ -95,7 +110,8 @@ fun NewTextField() {
         value = textValue,
         onValueChange = { textValue = it },
         label = { Text(text = "Enter Data") },
-        modifier = Modifier.fillMaxWidth())
+        modifier = Modifier.fillMaxWidth()
+    )
 }
 
 @Composable
