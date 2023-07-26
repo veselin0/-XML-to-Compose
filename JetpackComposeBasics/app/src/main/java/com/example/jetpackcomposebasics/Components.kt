@@ -10,6 +10,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -26,6 +27,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
@@ -39,6 +41,26 @@ private fun ComponentsPreview() {
 //    NewTextView()
 
     Components()
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun NewTextFieldOutlined() {
+    var textValue by remember { mutableStateOf("") }
+    var passValue by remember { mutableStateOf("") }
+
+    OutlinedTextField(
+        value = textValue,
+        onValueChange = { textValue = it },
+        label = { Text(text = "Enter More Data")},
+        modifier = Modifier.fillMaxWidth())
+
+    OutlinedTextField(
+        value = passValue,
+        onValueChange = { passValue = it },
+        label = { Text(text = "Enter Password")},
+        visualTransformation =  PasswordVisualTransformation(),
+        modifier = Modifier.fillMaxWidth())
 }
 
 @Composable
@@ -59,6 +81,7 @@ fun Components() {
             NewTextView()
             CustomDivider()
             NewTextField()
+            NewTextFieldOutlined()
         }
     }
 }
@@ -71,7 +94,8 @@ fun NewTextField() {
     TextField(
         value = textValue,
         onValueChange = { textValue = it },
-        label = { Text(text = "Enter Data") })
+        label = { Text(text = "Enter Data") },
+        modifier = Modifier.fillMaxWidth())
 }
 
 @Composable
