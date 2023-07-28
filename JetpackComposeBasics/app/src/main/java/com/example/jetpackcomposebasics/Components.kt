@@ -14,8 +14,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Chip
+import androidx.compose.material.ChipDefaults
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -51,7 +56,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import java.nio.file.WatchEvent
+
 
 @Preview(showBackground = true, showSystemUi = true, locale = "bg")
 @Composable
@@ -113,7 +118,34 @@ fun Components() {
             NewTextFieldOutlined()
             CustomDivider()
             NewImageView()
+            NewChip()
         }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun NewChip() {
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Chip(onClick = { }) { Text(text = "Label") }
+        Chip(onClick = { }, leadingIcon = {
+            Icon(
+                imageVector = Icons.Filled.Notifications,
+                contentDescription = "Notification"
+            )
+        }, modifier = Modifier.padding(start = 4.dp)) {
+            Text(text = "Label")
+            Icon(
+                imageVector = Icons.Filled.Close,
+                contentDescription = "Notification",
+                modifier = Modifier.size(16.dp)
+            )
+        }
+        Chip(
+            onClick = { },
+            border = ChipDefaults.outlinedBorder,
+            colors = ChipDefaults.outlinedChipColors()
+        ) { Text(text = "Label") }
     }
 }
 
