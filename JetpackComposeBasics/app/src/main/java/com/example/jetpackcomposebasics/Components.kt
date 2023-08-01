@@ -17,10 +17,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Chip
 import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,6 +31,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -56,6 +60,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.wear.tiles.material.Chip
 
 
 @Preview(showBackground = true, showSystemUi = true, locale = "bg")
@@ -118,10 +123,32 @@ fun Components() {
             NewTextFieldOutlined()
             CustomDivider()
             NewImageView()
+            CustomDivider()
             NewChip()
+            CustomDivider()
+            NewButton()
         }
     }
 }
+
+@Composable
+fun NewButton() {
+    Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+        Button(onClick = {  }) { Text(text = "Finish") }
+        Button(onClick = {  }) {
+            Icon(
+                imageVector = Icons.Filled.Close,
+                contentDescription = "Close Icon",
+                modifier = Modifier.size(ButtonDefaults.IconSize)
+            )
+            Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+            Text(text = "Send")
+        }
+        OutlinedButton(onClick = { }) { Text(text = "Back") }
+        TextButton(onClick = { }) { Text(text = "Exit") }
+    }
+}
+
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
