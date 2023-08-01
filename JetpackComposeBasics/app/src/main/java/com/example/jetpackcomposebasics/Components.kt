@@ -22,6 +22,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -38,6 +41,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
@@ -48,6 +52,8 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -127,6 +133,50 @@ fun Components() {
             NewChip()
             CustomDivider()
             NewButton()
+            CustomDivider()
+            NewBadge()
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun NewBadge() {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        BadgedBox(badge = {
+            Badge {
+                val badgeNumber = "5"
+                Text(
+                    text = badgeNumber,
+                    modifier = Modifier.semantics { contentDescription = "$badgeNumber items" })
+            }
+        }) {
+            Icon(
+                imageVector = Icons.Filled.ShoppingCart,
+                contentDescription = "Shopping Cart Icon"
+            )
+        }
+
+        OutlinedButton(onClick = { }) {
+            Text(text = "View Cart")
+            BadgedBox(badge = {
+                Badge {
+                    val badgeNumber = "5"
+                    Text(
+                        text = badgeNumber,
+                        modifier = Modifier.semantics { contentDescription = "$badgeNumber items" })
+                }
+                Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.ShoppingCart,
+                    contentDescription = "Shopping Cart Icon",
+                    Modifier.size(ButtonDefaults.IconSize)
+                )
+            }
         }
     }
 }
@@ -134,8 +184,8 @@ fun Components() {
 @Composable
 fun NewButton() {
     Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-        Button(onClick = {  }) { Text(text = "Finish") }
-        Button(onClick = {  }) {
+        Button(onClick = { }) { Text(text = "Finish") }
+        Button(onClick = { }) {
             Icon(
                 imageVector = Icons.Filled.Close,
                 contentDescription = "Close Icon",
