@@ -13,8 +13,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Chip
 import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
@@ -119,29 +121,31 @@ fun CustomDivider() {
 }
 
 @Composable
-fun Components() {
-    Card(
-        Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-    ) {
-        Column(Modifier.padding(8.dp)) {
-            NewTextView()
-            CustomDivider()
-            NewTextField()
-            NewTextFieldOutlined()
-            CustomDivider()
-            NewImageView()
-            CustomDivider()
-            NewChip()
-            CustomDivider()
-            NewButton()
-            CustomDivider()
-            NewBadge()
+fun Components(modifier: Modifier = Modifier) {
+   Column(modifier = modifier.verticalScroll(rememberScrollState())) {
+       Card(
+           modifier = modifier
+               .fillMaxWidth()
+               .padding(8.dp)
+       ) {
+           Column(Modifier.padding(8.dp)) {
+               NewTextView()
+               CustomDivider()
+               NewTextField()
+               NewTextFieldOutlined()
+               CustomDivider()
+               NewImageView()
+               CustomDivider()
+               NewChip()
+               CustomDivider()
+               NewButton()
+               CustomDivider()
+               NewBadge()
 //            CustomDivider()
-            NewChecks()
-        }
-    }
+               NewChecks()
+           }
+       }
+   }
 }
 
 @Composable
