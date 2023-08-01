@@ -1,6 +1,7 @@
 package com.example.jetpackcomposebasics
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -122,7 +123,9 @@ fun CustomDivider() {
 
 @Composable
 fun Components(modifier: Modifier = Modifier) {
-   Column(modifier = modifier.verticalScroll(rememberScrollState())) {
+   Column(modifier = modifier
+       .verticalScroll(rememberScrollState())
+       .background(Color.Cyan)) {
        Card(
            modifier = modifier
                .fillMaxWidth()
