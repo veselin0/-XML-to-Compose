@@ -2,6 +2,7 @@ package com.example.jetpackcomposebasics
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,7 @@ import androidx.compose.material.Chip
 import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.OutlinedButton
+import androidx.compose.material.Switch
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Close
@@ -28,6 +30,7 @@ import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -135,7 +138,26 @@ fun Components() {
             NewButton()
             CustomDivider()
             NewBadge()
+//            CustomDivider()
+            NewChecks()
         }
+    }
+}
+
+@Composable
+fun NewChecks() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        var isCheckboxChecked by remember { mutableStateOf(false) }
+        Checkbox(checked = isCheckboxChecked, onCheckedChange = { isCheckboxChecked = it })
+        Text(text = "T&C")
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        var isSwitchChecked by remember { mutableStateOf(false) }
+        Text(text = "Announcements")
+        Switch(checked = isSwitchChecked, onCheckedChange = {isSwitchChecked = it})
     }
 }
 
@@ -143,7 +165,7 @@ fun Components() {
 @Composable
 fun NewBadge() {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         BadgedBox(badge = {
@@ -163,19 +185,20 @@ fun NewBadge() {
         OutlinedButton(onClick = { }) {
             Text(text = "View Cart")
             BadgedBox(badge = {
-                Badge {
+                Badge() {
                     val badgeNumber = "5"
                     Text(
                         text = badgeNumber,
-                        modifier = Modifier.semantics { contentDescription = "$badgeNumber items" })
+                        modifier = Modifier.semantics { contentDescription = "$badgeNumber items" }
+                    )
                 }
                 Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
             }) {
                 Icon(
                     imageVector = Icons.Filled.ShoppingCart,
                     contentDescription = "Shopping Cart Icon",
-                    Modifier.size(ButtonDefaults.IconSize)
-                )
+
+                    )
             }
         }
     }
@@ -183,7 +206,7 @@ fun NewBadge() {
 
 @Composable
 fun NewButton() {
-    Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         Button(onClick = { }) { Text(text = "Finish") }
         Button(onClick = { }) {
             Icon(
