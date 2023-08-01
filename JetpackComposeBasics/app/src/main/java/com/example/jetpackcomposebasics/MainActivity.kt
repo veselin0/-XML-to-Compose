@@ -32,7 +32,9 @@ class MainActivity : ComponentActivity() {
 
 //                    NewTextView()
 
-                    Components()
+//                    Components()
+
+                    NewAppBars()
                 }
 
             }
