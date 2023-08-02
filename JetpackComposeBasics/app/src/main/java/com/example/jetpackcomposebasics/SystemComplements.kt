@@ -1,6 +1,7 @@
 package com.example.jetpackcomposebasics
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Divider
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.ExtendedFloatingActionButton
@@ -10,6 +11,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -38,6 +40,11 @@ fun NewAppBars() {
         topBar = {
             TopAppBar(
                 title = { Text(text = stringResource(id = R.string.app_name)) },
+                navigationIcon = {
+                    IconButton(onClick = { scope.launch { scaffoldState.drawerState.open() } }) {
+                        Icon(imageVector = Icons.Filled.Menu, contentDescription = "Open Drawer")
+                    }
+                },
                 actions = {
                     var isMenuOpened by remember { mutableStateOf(false) }
                     IconButton(onClick = { isMenuOpened = true }) {
@@ -82,6 +89,13 @@ fun NewMenu(isExpanded: Boolean, onItemClick: (String) -> Unit, onDismiss: () ->
             }) {
                 Text(text = item)
             }
+        }
+        Divider()
+        DropdownMenuItem(onClick = {
+            onItemClick("action_logout")
+            onDismiss()
+        }) {
+            Text(text = "Log out")
         }
     }
 }
