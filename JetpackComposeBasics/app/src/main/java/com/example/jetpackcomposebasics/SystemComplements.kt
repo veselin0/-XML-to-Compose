@@ -1,5 +1,7 @@
 package com.example.jetpackcomposebasics
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
 import androidx.compose.material.DropdownMenu
@@ -11,8 +13,12 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Send
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.launch
@@ -60,6 +67,25 @@ fun NewAppBars() {
                     }
                 }
             )
+        },
+        drawerContent = {
+            val menuItems = mapOf<String, ImageVector>(
+                Pair("Favorites", Icons.Filled.Favorite),
+                Pair("Save", Icons.Filled.Send),
+                Pair("History", Icons.Filled.List),
+                Pair("Settings", Icons.Filled.Settings),
+            )
+
+            menuItems.forEach {
+                Row(modifier = Modifier.clickable {
+                    scope.launch {
+                        scaffoldState.drawerState.close()
+                    }
+                }) {
+                    Icon(imageVector = it.value, contentDescription = it.key)
+                    Text(text = it.key)
+                }
+            }
         },
         floatingActionButton = {
             ExtendedFloatingActionButton(
