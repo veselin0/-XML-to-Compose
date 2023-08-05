@@ -1,5 +1,6 @@
 package com.example.jetpackcomposebasics
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -20,15 +21,17 @@ import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Preview(
     showBackground = true,
-    showSystemUi = true,
+    showSystemUi = false,
     backgroundColor = 0xFFFFFFFF,
-    device = Devices.NEXUS_7
+    widthDp = 650,
+    heightDp = 320
 )
 @Composable
 private fun ModifierPreview() {
@@ -39,16 +42,20 @@ private fun ModifierPreview() {
 }
 
 @Composable
-fun NewResponsive() {
+fun NewResponsive(painterRes: Int = R.drawable.another_kitten) {
     BoxWithConstraints() {
         Card(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(8.dp)
+                .padding(if (minWidth < 720.dp) 8.dp else 32.dp)
         ) {
             if (minWidth > 600.dp) {
                 Row(modifier = Modifier.padding(8.dp)) {
-                    TextFro(modifier = Modifier.fillMaxWidth())
+                    Image(
+                        painter = painterResource(id = painterRes),
+                        contentDescription = "Image of a kitten"
+                    )
+                    TextFro(modifier = Modifier.weight(1f))
                     TextANT()
                 }
             } else {

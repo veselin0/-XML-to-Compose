@@ -34,7 +34,9 @@ class MainActivity : ComponentActivity() {
 
 //                    Components()
 
-                    NewAppBars()
+//                    NewAppBars()
+
+                    NewResponsive()
                 }
 
             }
