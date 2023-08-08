@@ -1,6 +1,7 @@
 package com.example.filmsjc
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -16,6 +17,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.filmsjc.ui.theme.FilmsJCTheme
@@ -52,11 +54,12 @@ fun AdvancedListClick(title: String, modifier: Modifier) {
 
 @Composable
 fun AdvancedList(films: List<Film>) {
+    val context = LocalContext.current
     LazyColumn {
         items(films.size) {
 //            BasicItemsList(title = films[it].name)
             AdvancedListClick(title = films[it].name, modifier = Modifier.clickable {
-
+                Toast.makeText(context, films[it].name, Toast.LENGTH_SHORT).show()
             })
             Divider()
         }
