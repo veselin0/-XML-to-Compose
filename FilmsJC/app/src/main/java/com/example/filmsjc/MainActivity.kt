@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ListItem
@@ -22,10 +26,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.example.filmsjc.ui.theme.FilmsJCTheme
 
 class MainActivity : ComponentActivity() {
@@ -47,7 +56,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalGlideComposeApi::class)
 @Composable
 fun AdvancedListCustomizedItem(film: Film, modifier: Modifier) {
     Column(modifier = modifier) {
@@ -67,7 +76,24 @@ fun AdvancedListCustomizedItem(film: Film, modifier: Modifier) {
                 )
             },
             singleLineSecondaryText = false,
-            icon = { Icon(imageVector = Icons.Filled.Star, contentDescription = "Cover film") }
+//            icon = { Icon(imageVector = Icons.Filled.Star, contentDescription = "Cover film") }
+            icon = {
+                GlideImage(
+                    model = film.photoUrl,
+                    contentDescription = "Cover Film",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(dimensionResource(id = R.dimen.list_item_img_size))
+                        .clip(CircleShape)
+                        .border(
+                            BorderStroke(
+                                width = dimensionResource(id = R.dimen.list_item_img_stroke),
+                                color = Color.Cyan
+                            ), CircleShape
+                        )
+                )
+
+            }
         )
         Divider()
     }

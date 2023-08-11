@@ -68,7 +68,7 @@ object FakeDatabase {
             "Whiplash",
             "Andrew Neiman is a first-year student and jazz drummer at the prestigious Shaffer Conservatory in New York City, hoping one day to leave a legacy like that of his childhood idol, jazz drummer Buddy Rich.",
             5.0f,
-            "https://en.wikipedia.org/wiki/File:Whiplash_poster.jpg"
+            "https://upload.wikimedia.org/wikipedia/en/0/01/Whiplash_poster.jpg"
         )
     )
 }
