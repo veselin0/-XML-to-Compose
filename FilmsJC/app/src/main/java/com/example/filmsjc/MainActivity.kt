@@ -14,13 +14,17 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ListItem
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.filmsjc.ui.theme.FilmsJCTheme
 
@@ -46,23 +50,27 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AdvancedListCustomizedItem(film: Film, modifier: Modifier) {
-   Column(modifier = modifier) {
-       ListItem(
-           text = {
-               Text(
-                   text = film.name,
-                   style = MaterialTheme.typography.h6
-               )
-           },
-           secondaryText = {
-               Text(
-                   text = film.description,
-                   style = MaterialTheme.typography.subtitle1
-               )
-           }
-       )
-       Divider()
-   }
+    Column(modifier = modifier) {
+        ListItem(
+            text = {
+                Text(
+                    text = film.name,
+                    style = MaterialTheme.typography.h6
+                )
+            },
+            secondaryText = {
+                Text(
+                    text = film.description,
+                    style = MaterialTheme.typography.subtitle1,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+            },
+            singleLineSecondaryText = false,
+            icon = { Icon(imageVector = Icons.Filled.Star, contentDescription = "Cover film") }
+        )
+        Divider()
+    }
 }
 
 @Composable
