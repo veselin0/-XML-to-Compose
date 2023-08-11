@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ListItem
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
@@ -41,8 +43,30 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AdvancedListClick(title: String, modifier: Modifier) {
+fun AdvancedListCustomizedItem(film: Film, modifier: Modifier) {
+   Column(modifier = modifier) {
+       ListItem(
+           text = {
+               Text(
+                   text = film.name,
+                   style = MaterialTheme.typography.h6
+               )
+           },
+           secondaryText = {
+               Text(
+                   text = film.description,
+                   style = MaterialTheme.typography.subtitle1
+               )
+           }
+       )
+       Divider()
+   }
+}
+
+@Composable
+fun AdvancedListClickableItem(title: String, modifier: Modifier) {
     Text(
         text = title,
         modifier = modifier
@@ -58,10 +82,14 @@ fun AdvancedList(films: List<Film>) {
     LazyColumn {
         items(films.size) {
 //            BasicItemsList(title = films[it].name)
-            AdvancedListClick(title = films[it].name, modifier = Modifier.clickable {
+//            AdvancedListClickableItem(title = films[it].name, modifier = Modifier.clickable {
+//                Toast.makeText(context, films[it].name, Toast.LENGTH_SHORT).show()
+//            })
+//            Divider()
+            val film = films[it]
+            AdvancedListCustomizedItem(film = film, modifier = Modifier.clickable {
                 Toast.makeText(context, films[it].name, Toast.LENGTH_SHORT).show()
             })
-            Divider()
         }
     }
 }
