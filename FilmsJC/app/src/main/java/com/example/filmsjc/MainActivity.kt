@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -33,6 +34,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.filmsjc.ui.theme.FilmsJCTheme
@@ -83,19 +85,19 @@ fun AdvancedListCustomizedItem(film: Film, modifier: Modifier) {
                     contentDescription = "Cover Film",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .size(dimensionResource(id = R.dimen.list_item_img_size))
-                        .clip(CircleShape)
+                        .size(width = 48.dp, height = 72.dp) //dimensionResource(id = R.dimen.list_item_img_size)
+//                        .clip(CircleShape)
                         .border(
                             BorderStroke(
                                 width = dimensionResource(id = R.dimen.list_item_img_stroke),
                                 color = Color.Cyan
-                            ), CircleShape
+                            )
                         )
                 )
 
             }
         )
-        Divider()
+        Divider(thickness = 2.dp, color = Color.Cyan)
     }
 }
 
@@ -121,7 +123,7 @@ fun AdvancedList(films: List<Film>) {
 //            })
 //            Divider()
             val film = films[it]
-            AdvancedListCustomizedItem(film = film, modifier = Modifier.clickable {
+            AdvancedListCustomizedItem(film = film, modifier = Modifier.background(Color.LightGray).clickable {
                 Toast.makeText(context, films[it].name, Toast.LENGTH_SHORT).show()
             })
         }
