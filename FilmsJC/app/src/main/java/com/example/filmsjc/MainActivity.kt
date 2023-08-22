@@ -8,8 +8,11 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,15 +29,19 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.filmsjc.ui.theme.FilmsJCTheme
@@ -85,7 +92,10 @@ fun AdvancedListCustomizedItem(film: Film, modifier: Modifier) {
                     contentDescription = "Cover Film",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .size(width = 48.dp, height = 72.dp) //dimensionResource(id = R.dimen.list_item_img_size)
+                        .size(
+                            width = 48.dp,
+                            height = 72.dp
+                        ) //dimensionResource(id = R.dimen.list_item_img_size)
 //                        .clip(CircleShape)
                         .border(
                             BorderStroke(
@@ -95,6 +105,22 @@ fun AdvancedListCustomizedItem(film: Film, modifier: Modifier) {
                         )
                 )
 
+            },
+            trailing = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(dimensionResource(id = R.dimen.common_padding_default)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Star,
+                        contentDescription = "Star image",
+                        tint = colorResource(id = R.color.trailing_star),
+                        modifier = Modifier.size(dimensionResource(id = R.dimen.list_item_trailing_size))
+                    )
+                    Text(text = "${film.score}", fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                }
             }
         )
         Divider(thickness = 2.dp, color = Color.Cyan)
@@ -123,9 +149,13 @@ fun AdvancedList(films: List<Film>) {
 //            })
 //            Divider()
             val film = films[it]
-            AdvancedListCustomizedItem(film = film, modifier = Modifier.background(Color.LightGray).clickable {
-                Toast.makeText(context, films[it].name, Toast.LENGTH_SHORT).show()
-            })
+            AdvancedListCustomizedItem(film = film, modifier = Modifier
+                .background(Color.LightGray)
+                .clickable {
+                    Toast
+                        .makeText(context, films[it].name, Toast.LENGTH_SHORT)
+                        .show()
+                })
         }
     }
 }
