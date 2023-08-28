@@ -46,6 +46,8 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    private var textSurname = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -90,13 +92,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.etSurname.setContent {
             MdcTheme {
-                EtSurname()
+                EtSurname { textSurname = it.trim() }
             }
         }
     }
 
     @Composable
-    private fun EtSurname() {
+    private fun EtSurname(onValueChanged: (String) -> Unit) {
         var textValue by remember { mutableStateOf("") }
         var isError by remember { mutableStateOf(false) }
         Column() {
@@ -105,6 +107,7 @@ class MainActivity : AppCompatActivity() {
                 onValueChange = {
                     textValue = it
                     isError = it.isEmpty()
+                    onValueChanged(it)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -153,7 +156,7 @@ class MainActivity : AppCompatActivity() {
                 builder.setMessage(
                     joinData(
                         name,
-                        "surname",
+                        textSurname,
                         height,
                         dateBirth,
                         country,
