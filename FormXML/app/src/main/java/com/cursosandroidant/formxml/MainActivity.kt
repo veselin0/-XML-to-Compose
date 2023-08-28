@@ -8,9 +8,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatCheckedTextView
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -95,19 +98,31 @@ class MainActivity : AppCompatActivity() {
     @Composable
     private fun EtSurname() {
         var textValue by remember { mutableStateOf("") }
-        OutlinedTextField(
-            value = textValue,
-            onValueChange = {textValue = it},
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = dimensionResource(id = R.dimen.common_padding_default)),
-            label = {
-                Text(text = stringResource(id = R.string.hint_surname))
-            },
-            leadingIcon = {
-                Icon(imageVector = Icons.Filled.Person, contentDescription = null)
-            }
-        )
+        Column() {
+            OutlinedTextField(
+                value = textValue,
+                onValueChange = { textValue = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = dimensionResource(id = R.dimen.common_padding_default)),
+                label = {
+                    Text(text = stringResource(id = R.string.hint_surname))
+                },
+                leadingIcon = {
+                    Icon(imageVector = Icons.Filled.Person, contentDescription = null)
+                }
+            )
+
+            Text(
+                text = stringResource(id = R.string.help_required),
+                style = MaterialTheme.typography.caption,
+                color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium),
+                modifier = Modifier.padding(
+                    start = dimensionResource(id = R.dimen.common_padding_default),
+                    top = dimensionResource(id = R.dimen.common_padding_micro)
+                )
+            )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
