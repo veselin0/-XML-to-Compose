@@ -98,10 +98,14 @@ class MainActivity : AppCompatActivity() {
     @Composable
     private fun EtSurname() {
         var textValue by remember { mutableStateOf("") }
+        var isError by remember { mutableStateOf(false) }
         Column() {
             OutlinedTextField(
                 value = textValue,
-                onValueChange = { textValue = it },
+                onValueChange = {
+                    textValue = it
+                    isError = it.isEmpty()
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = dimensionResource(id = R.dimen.common_padding_default)),
@@ -110,13 +114,15 @@ class MainActivity : AppCompatActivity() {
                 },
                 leadingIcon = {
                     Icon(imageVector = Icons.Filled.Person, contentDescription = null)
-                }
+                },
+                isError = isError
             )
 
             Text(
                 text = stringResource(id = R.string.help_required),
                 style = MaterialTheme.typography.caption,
-                color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium),
+                color = if (isError) MaterialTheme.colors.error
+                else MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium),
                 modifier = Modifier.padding(
                     start = dimensionResource(id = R.dimen.common_padding_default),
                     top = dimensionResource(id = R.dimen.common_padding_micro)
