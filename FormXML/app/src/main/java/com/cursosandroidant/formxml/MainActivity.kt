@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatCheckedTextView
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ContentAlpha
@@ -18,9 +19,11 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.cursosandroidant.formxml.databinding.ActivityMainBinding
 import com.google.android.material.composethemeadapter.MdcTheme
@@ -47,6 +50,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private var textSurname = ""
+
+    private var textHeight = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +100,54 @@ class MainActivity : AppCompatActivity() {
                 EtSurname { textSurname = it.trim() }
             }
         }
+
+        binding.etHeight.setContent {
+            MdcTheme {
+                EtHeight { textHeight = it.trim() }
+            }
+        }
+    }
+
+    @Composable
+    private fun EtHeight(onValueChanged: (String) -> Unit) {
+        var textValue by remember { mutableStateOf("") }
+        var isError by remember { mutableStateOf(false) }
+        Column() {
+            OutlinedTextField(
+                value = textValue,
+                onValueChange = {
+                    textValue = it
+                    isError = it.isEmpty()
+                    onValueChanged(it)
+                },
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(40f)
+                    .padding(
+//                        top = dimensionResource(id = R.dimen.common_padding_default),
+                        end = dimensionResource(id = R.dimen.common_padding_min)
+                    ),
+                label = {
+                    Text(text = stringResource(id = R.string.hint_height))
+                },
+                leadingIcon = {
+                    Icon(painterResource(id = R.drawable.ic_height), contentDescription = null)
+                },
+                isError = isError
+            )
+
+            Text(
+                text = stringResource(id = R.string.help_min_height),
+                style = MaterialTheme.typography.caption,
+                color = if (isError) MaterialTheme.colors.error
+                else MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium),
+                modifier = Modifier.padding(
+                    start = dimensionResource(id = R.dimen.common_padding_default),
+                    top = dimensionResource(id = R.dimen.common_padding_micro)
+                )
+            )
+        }
+
     }
 
     @Composable
@@ -145,7 +198,7 @@ class MainActivity : AppCompatActivity() {
                 val name: String =
                     findViewById<TextInputEditText>(R.id.etName).text.toString().trim()
 //                val surname = binding.etSurname.text.toString().trim()
-                val height = binding.etHeight.text.toString().trim()
+//                val height = binding.etHeight.text.toString().trim()
                 val dateBirth = binding.etDateBirth.text.toString().trim()
                 val country = binding.actvCountries.text.toString().trim()
                 val placeBirth = binding.etPlaceBirth.text.toString().trim()
@@ -157,7 +210,7 @@ class MainActivity : AppCompatActivity() {
                     joinData(
                         name,
                         textSurname,
-                        height,
+                        textHeight,
                         dateBirth,
                         country,
                         placeBirth,
@@ -168,7 +221,7 @@ class MainActivity : AppCompatActivity() {
                     with(binding) {
                         etName.text?.clear()
 //                        etSurname.text?.clear()
-                        etHeight.text?.clear()
+//                        etHeight.text?.clear()
                         etDateBirth.text?.clear()
                         actvCountries.text?.clear()
                         etPlaceBirth.text?.clear()
@@ -200,21 +253,21 @@ class MainActivity : AppCompatActivity() {
     private fun validFields(): Boolean {
         var isValid = true
 
-        if (binding.etHeight.text.isNullOrEmpty()) {
-            binding.tilHeight.run {
-                error = getString(R.string.help_required)
-                requestFocus()
-            }
-            isValid = false
-        } else if (binding.etHeight.text.toString().toInt() < 50) {
-            binding.tilHeight.run {
-                error = getString(R.string.help_min_height_valid)
-                requestFocus()
-            }
-            isValid = false
-        } else {
-            binding.tilHeight.error = null
-        }
+//        if (binding.etHeight.text.isNullOrEmpty()) {
+//            binding.tilHeight.run {
+//                error = getString(R.string.help_required)
+//                requestFocus()
+//            }
+//            isValid = false
+//        } else if (binding.etHeight.text.toString().toInt() < 50) {
+//            binding.tilHeight.run {
+//                error = getString(R.string.help_min_height_valid)
+//                requestFocus()
+//            }
+//            isValid = false
+//        } else {
+//            binding.tilHeight.error = null
+//        }
 
 //        if (binding.etSurname.text.isNullOrEmpty()) {
 //            binding.tilSurname.run {
