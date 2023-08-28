@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -25,6 +26,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import com.cursosandroidant.formxml.databinding.ActivityMainBinding
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -130,6 +133,7 @@ class MainActivity : AppCompatActivity() {
                 label = {
                     Text(text = stringResource(id = R.string.hint_height))
                 },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 leadingIcon = {
                     Icon(painterResource(id = R.drawable.ic_height), contentDescription = null)
                 },
@@ -168,6 +172,10 @@ class MainActivity : AppCompatActivity() {
                 label = {
                     Text(text = stringResource(id = R.string.hint_surname))
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    capitalization = KeyboardCapitalization.Words
+                ),
                 leadingIcon = {
                     Icon(imageVector = Icons.Filled.Person, contentDescription = null)
                 },
