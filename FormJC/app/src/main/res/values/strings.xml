@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Form JC</string>
+    <string name="app_bar_action_send">Send</string>
 </resources>
