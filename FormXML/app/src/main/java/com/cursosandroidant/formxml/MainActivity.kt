@@ -20,7 +20,6 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -112,9 +111,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Composable
+    fun ValidHeight() {
+        var text:String = ""
+        text = if (textHeight.toInt() >= 50)
+            stringResource(id = R.string.help_min_height) else
+            stringResource(id = R.string.help_min_height_valid)
+    }
+
+    @Composable
     private fun EtHeight(onValueChanged: (String) -> Unit) {
         var textValue by remember { mutableStateOf("") }
         var isError by remember { mutableStateOf(false) }
+
         Column() {
             OutlinedTextField(
                 value = textValue,
@@ -141,7 +149,8 @@ class MainActivity : AppCompatActivity() {
             )
 
             Text(
-                text = stringResource(id = R.string.help_min_height),
+                text = if (isError) stringResource(id = R.string.help_min_height_valid)
+                else stringResource(id = R.string.help_min_height),
                 style = MaterialTheme.typography.caption,
                 color = if (isError) MaterialTheme.colors.error
                 else MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium),
