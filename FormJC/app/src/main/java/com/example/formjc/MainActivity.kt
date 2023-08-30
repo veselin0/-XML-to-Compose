@@ -36,7 +36,6 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     topBar = { ToolbarForm() },
                     modifier = Modifier.fillMaxSize(),
-//                    contentColor = colorResource(id = R.color.purple_700),
                     content = {
                         CForm()
                     }
@@ -62,7 +61,7 @@ fun ToolbarForm() {
             }
         },
         colors = TopAppBarDefaults.smallTopAppBarColors(
-            containerColor = colorResource(id = R.color.purple_500),
+            containerColor = colorResource(id = R.color.blue_500),
             titleContentColor = colorResource(id = R.color.white),
             actionIconContentColor = colorResource(id = R.color.white)
         )
