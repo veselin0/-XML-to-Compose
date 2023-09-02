@@ -14,11 +14,11 @@ import com.example.formjc.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ToolbarForm(onShowDialog: () -> Unit) {
+fun ToolbarForm(onShowDialog: (String) -> Unit) {
     TopAppBar(
         title = { Text(stringResource(id = R.string.app_name)) },
         actions = {
-            IconButton(onClick = { onShowDialog }) {
+            IconButton(onClick = { onShowDialog("Save!") }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_send),
                     contentDescription = stringResource(
