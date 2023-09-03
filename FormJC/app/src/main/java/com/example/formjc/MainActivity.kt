@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.formjc.ui.components.AlertDialogContent
 import com.example.formjc.ui.components.FormToolbar
 import com.example.formjc.ui.components.MyTopAppBar
 import com.example.formjc.ui.components.ToolbarForm
@@ -26,17 +27,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FormJCTheme {
-                val scaffoldState = rememberScaffoldState()
-                val coroutineScope = rememberCoroutineScope()
-                // A surface container using the 'background' color from the theme
+//                val scaffoldState = rememberScaffoldState()
+//                val coroutineScope = rememberCoroutineScope()
+                var openDialog by remember { mutableStateOf(false) }
                 Scaffold(
                     topBar = {
-                        FormToolbar { Log.i("Gocho", "onCreate: Launch dialog") } },
+                        FormToolbar { openDialog = true }
+                    },
                     modifier = Modifier.fillMaxSize(),
                     content = {
                         CForm()
                     }
                 )
+                if (openDialog) {
+                    AlertDialogContent(content = "Gocho!", onContentChange = { openDialog = false })
+                }
             }
         }
     }
