@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.formjc.Utils.joinData
 import com.example.formjc.ui.components.AlertDialogContent
 import com.example.formjc.ui.components.FormToolbar
 import com.example.formjc.ui.components.MyTopAppBar
@@ -22,7 +23,8 @@ import com.example.formjc.ui.theme.FormJCTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter",
+    @SuppressLint(
+        "UnusedMaterial3ScaffoldPaddingParameter",
         "UnusedMaterialScaffoldPaddingParameter"
     )
     @OptIn(ExperimentalMaterial3Api::class)
@@ -64,7 +66,29 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CForm(inputCallback: (String) -> Unit) {
-    inputCallback("Data collected")
+    var nameValue by remember { mutableStateOf("") }
+    var surnameValue by remember { mutableStateOf("") }
+    var heightValue by remember { mutableStateOf("") }
+    var birthDateValue by remember { mutableStateOf("") }
+    var countryValue by remember { mutableStateOf("") }
+    var birthPlaceValue by remember { mutableStateOf("") }
+    var noteValue by remember { mutableStateOf("") }
+
+    if (nameValue.isEmpty() || surnameValue.isEmpty() || heightValue.isEmpty()) {
+        inputCallback("")
+    } else {
+        inputCallback(
+            joinData(
+                nameValue,
+                surnameValue,
+                heightValue,
+                birthDateValue,
+                countryValue,
+                birthPlaceValue,
+                noteValue
+            )
+        )
+    }
 }
 
 @Preview(showBackground = true)
