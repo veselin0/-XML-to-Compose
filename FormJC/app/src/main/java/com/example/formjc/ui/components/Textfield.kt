@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -30,7 +31,8 @@ import java.util.Vector
 fun EtCustom(
     paddingTop: Dp = dimensionResource(id = R.dimen.common_padding_default),
     label: String,
-    icon: ImageVector,
+    icon: Painter,
+    maxLength: Int? = null,
     onValueChanged: (String) -> Unit
 ) {
     var textValue by remember { mutableStateOf("") }
@@ -39,9 +41,16 @@ fun EtCustom(
         OutlinedTextField(
             value = textValue,
             onValueChange = {
-                textValue = it
+                if (maxLength == null) {
+                    textValue = it
+                } else {
+                    if (it.length <= maxLength) {
+                        textValue = it
+                    }
+                }
+
                 isError = it.isEmpty()
-                onValueChanged(it)
+                onValueChanged(textValue)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -54,7 +63,7 @@ fun EtCustom(
                 capitalization = KeyboardCapitalization.Words
             ),
             leadingIcon = {
-                Icon(imageVector = icon, contentDescription = null)
+                Icon(painter = icon, contentDescription = null)
             },
             isError = isError
         )

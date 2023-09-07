@@ -20,6 +20,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.integerResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -110,28 +112,37 @@ fun CForm(inputCallback: (String) -> Unit) {
         EtCustom(
             paddingTop = dimensionResource(id = R.dimen.common_padding_null),
             label = stringResource(id = R.string.hint_name),
-            icon = Icons.Filled.Person
+            icon = painterResource(id = R.drawable.ic_person),
+            maxLength = integerResource(id = R.integer.name_max_length)
         ) { nameValue = it }
 
 //        Surname
         EtCustom(
             label = stringResource(id = R.string.hint_surname),
-            icon = Icons.Filled.Person
+            icon = painterResource(id = R.drawable.ic_person)
         ) { surnameValue = it }
+
+        //        Height
+        EtCustom(
+            label = stringResource(id = R.string.hint_height),
+            icon = painterResource(id = R.drawable.ic_height),
+            maxLength = integerResource(id = R.integer.height_max_length)
+        ) { heightValue = it }
 
 
         //        Birthplace
         EtCustom(
             label = stringResource(id = R.string.hint_birth_place),
-            icon = Icons.Filled.Place
+            icon = painterResource(id = R.drawable.ic_place)
         ) { birthPlaceValue = it }
     }
 
 }
-    @Preview(showBackground = true)
-    @Composable
-    fun GreetingPreview() {
-        FormJCTheme {
-            CForm {}
-        }
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    FormJCTheme {
+        CForm {}
     }
+}
