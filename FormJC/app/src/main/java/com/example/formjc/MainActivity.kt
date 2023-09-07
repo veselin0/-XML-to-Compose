@@ -13,6 +13,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -102,17 +105,33 @@ fun CForm(inputCallback: (String) -> Unit) {
             .padding(dimensionResource(id = R.dimen.common_padding_default))
             .verticalScroll(rememberScrollState())
     ) {
-        EtCustom(paddingTop = dimensionResource(id = R.dimen.common_padding_null)) {
-            nameValue = it
-        }
-        EtCustom { surnameValue = it }
-    }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    FormJCTheme {
-        CForm {}
+//        Name
+        EtCustom(
+            paddingTop = dimensionResource(id = R.dimen.common_padding_null),
+            label = stringResource(id = R.string.hint_name),
+            icon = Icons.Filled.Person
+        ) { nameValue = it }
+
+//        Surname
+        EtCustom(
+            label = stringResource(id = R.string.hint_surname),
+            icon = Icons.Filled.Person
+        ) { surnameValue = it }
+
+
+        //        Birthplace
+        EtCustom(
+            label = stringResource(id = R.string.hint_birth_place),
+            icon = Icons.Filled.Place
+        ) { birthPlaceValue = it }
     }
+
 }
+    @Preview(showBackground = true)
+    @Composable
+    fun GreetingPreview() {
+        FormJCTheme {
+            CForm {}
+        }
+    }

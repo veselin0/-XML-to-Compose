@@ -17,16 +17,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.Dp
 import com.example.formjc.R
+import java.util.Vector
 
 @Composable
 fun EtCustom(
     paddingTop: Dp = dimensionResource(id = R.dimen.common_padding_default),
+    label: String,
+    icon: ImageVector,
     onValueChanged: (String) -> Unit
 ) {
     var textValue by remember { mutableStateOf("") }
@@ -43,14 +47,14 @@ fun EtCustom(
                 .fillMaxWidth()
                 .padding(top = paddingTop),
             label = {
-                Text(text = stringResource(id = R.string.hint_surname))
+                Text(text = label)
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 capitalization = KeyboardCapitalization.Words
             ),
             leadingIcon = {
-                Icon(imageVector = Icons.Filled.Person, contentDescription = null)
+                Icon(imageVector = icon, contentDescription = null)
             },
             isError = isError
         )
