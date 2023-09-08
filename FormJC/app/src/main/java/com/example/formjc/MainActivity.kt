@@ -113,20 +113,23 @@ fun CForm(inputCallback: (String) -> Unit) {
             paddingTop = dimensionResource(id = R.dimen.common_padding_null),
             label = stringResource(id = R.string.hint_name),
             icon = painterResource(id = R.drawable.ic_person),
-            maxLength = integerResource(id = R.integer.name_max_length)
+            maxLength = integerResource(id = R.integer.name_max_length),
+            isRequired = true
         ) { nameValue = it }
 
 //        Surname
         EtCustom(
             label = stringResource(id = R.string.hint_surname),
-            icon = painterResource(id = R.drawable.ic_person)
+            icon = painterResource(id = R.drawable.ic_person),
+            isRequired = true
         ) { surnameValue = it }
 
         //        Height
         EtCustom(
             label = stringResource(id = R.string.hint_height),
             icon = painterResource(id = R.drawable.ic_height),
-            maxLength = integerResource(id = R.integer.height_max_length)
+            maxLength = integerResource(id = R.integer.height_max_length),
+            isRequired = true
         ) { heightValue = it }
 
 

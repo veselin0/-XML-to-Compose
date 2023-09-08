@@ -32,6 +32,8 @@ fun EtCustom(
     paddingTop: Dp = dimensionResource(id = R.dimen.common_padding_default),
     label: String,
     icon: Painter,
+    isRequired: Boolean = false,
+    isSingleLine: Boolean = true,
     maxLength: Int? = null,
     onValueChanged: (String) -> Unit
 ) {
@@ -65,18 +67,21 @@ fun EtCustom(
             leadingIcon = {
                 Icon(painter = icon, contentDescription = null)
             },
-            isError = isError
+            singleLine = isSingleLine,
+            isError = isError && isRequired
         )
 
-        Text(
-            text = stringResource(id = R.string.help_required),
-            style = MaterialTheme.typography.caption,
-            color = if (isError) MaterialTheme.colors.error
-            else MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium),
-            modifier = Modifier.padding(
-                start = dimensionResource(id = R.dimen.common_padding_default),
-                top = dimensionResource(id = R.dimen.common_padding_micro)
+        if (isRequired) {
+            Text(
+                text = stringResource(id = R.string.help_required),
+                style = MaterialTheme.typography.caption,
+                color = if (isError) MaterialTheme.colors.error
+                else MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium),
+                modifier = Modifier.padding(
+                    start = dimensionResource(id = R.dimen.common_padding_default),
+                    top = dimensionResource(id = R.dimen.common_padding_micro)
+                )
             )
-        )
+        }
     }
 }
