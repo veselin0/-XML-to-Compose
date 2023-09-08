@@ -2,7 +2,6 @@ package com.example.formjc
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -11,11 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Place
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -24,13 +19,10 @@ import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.formjc.Utils.joinData
 import com.example.formjc.ui.components.AlertDialogContent
-import com.example.formjc.ui.components.EtCustom
+import com.example.formjc.ui.components.TextFieldCustom
 import com.example.formjc.ui.components.FormToolbar
-import com.example.formjc.ui.components.MyTopAppBar
-import com.example.formjc.ui.components.ToolbarForm
 import com.example.formjc.ui.theme.FormJCTheme
 import kotlinx.coroutines.launch
 
@@ -109,7 +101,7 @@ fun CForm(inputCallback: (String) -> Unit) {
     ) {
 
 //        Name
-        EtCustom(
+        TextFieldCustom(
             paddingTop = dimensionResource(id = R.dimen.common_padding_null),
             label = stringResource(id = R.string.hint_name),
             icon = painterResource(id = R.drawable.ic_person),
@@ -118,23 +110,25 @@ fun CForm(inputCallback: (String) -> Unit) {
         ) { nameValue = it }
 
 //        Surname
-        EtCustom(
+        TextFieldCustom(
             label = stringResource(id = R.string.hint_surname),
             icon = painterResource(id = R.drawable.ic_person),
             isRequired = true
         ) { surnameValue = it }
 
         //        Height
-        EtCustom(
+        TextFieldCustom(
             label = stringResource(id = R.string.hint_height),
             icon = painterResource(id = R.drawable.ic_height),
             maxLength = integerResource(id = R.integer.height_max_length),
-            isRequired = true
+            isRequired = true,
+            minValue = integerResource(id = R.integer.height_min_value),
+            errorResource = R.string.help_min_height_valid
         ) { heightValue = it }
 
 
         //        Birthplace
-        EtCustom(
+        TextFieldCustom(
             label = stringResource(id = R.string.hint_birth_place),
             icon = painterResource(id = R.drawable.ic_place)
         ) { birthPlaceValue = it }
