@@ -17,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -25,9 +26,10 @@ import com.example.formjc.R
 
 @Composable
 fun TextFieldCustom(
+    modifier: Modifier = Modifier,
     paddingTop: Dp = dimensionResource(id = R.dimen.common_padding_default),
-    label: String,
-    icon: Painter,
+    labelResource: Int,
+    iconResource: Int,
     isRequired: Boolean = false,
     isSingleLine: Boolean = true,
     minValue: Int = 0,
@@ -37,7 +39,7 @@ fun TextFieldCustom(
 ) {
     var textValue by remember { mutableStateOf("") }
     var isError by remember { mutableStateOf(false) }
-    Column() {
+    Column(modifier = modifier) {
         OutlinedTextField(
             value = textValue,
             onValueChange = {
@@ -57,14 +59,14 @@ fun TextFieldCustom(
                 .fillMaxWidth()
                 .padding(top = paddingTop),
             label = {
-                Text(text = label)
+                Text(text = stringResource(id = labelResource))
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 capitalization = KeyboardCapitalization.Words
             ),
             leadingIcon = {
-                Icon(painter = icon, contentDescription = null)
+                Icon(painter = painterResource(id = iconResource), contentDescription = null)
             },
             singleLine = isSingleLine,
             isError = isError && isRequired
