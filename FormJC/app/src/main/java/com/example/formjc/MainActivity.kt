@@ -138,7 +138,8 @@ fun CForm(inputCallback: (String) -> Unit) {
             TextFieldCustom(
                 modifier = Modifier.weight(60f),
                 labelResource = R.string.hint_birth_date,
-                iconResource = R.drawable.ic_calendar_today
+                iconResource = R.drawable.ic_calendar_today,
+                isClickable = true
             ) { birthDateValue = it }
 
 

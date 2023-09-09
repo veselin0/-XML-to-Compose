@@ -1,5 +1,7 @@
 package com.example.formjc.ui.components
 
+import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -35,6 +37,7 @@ fun TextFieldCustom(
     minValue: Int = 0,
     errorResource: Int = R.string.help_required,
     maxLength: Int? = null,
+    isClickable: Boolean = false,
     onValueChanged: (String) -> Unit
 ) {
     var textValue by remember { mutableStateOf("") }
@@ -57,7 +60,8 @@ fun TextFieldCustom(
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = paddingTop),
+                .padding(top = paddingTop)
+                .clickable { if (isClickable) Log.i("Gocho", "Show calendar") },
             label = {
                 Text(text = stringResource(id = labelResource))
             },
@@ -69,7 +73,9 @@ fun TextFieldCustom(
                 Icon(painter = painterResource(id = iconResource), contentDescription = null)
             },
             singleLine = isSingleLine,
-            isError = isError && isRequired
+            isError = isError && isRequired,
+            readOnly = isClickable,
+            enabled = !isClickable
         )
 
         if (isRequired) {
