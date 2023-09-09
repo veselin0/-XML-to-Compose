@@ -1,6 +1,8 @@
 package com.example.formjc.ui.components
 
-import android.util.Log
+import android.app.DatePickerDialog
+import android.icu.util.Calendar
+import android.widget.DatePicker
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -25,6 +27,8 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.Dp
 import com.example.formjc.R
+import java.util.Date
+
 
 @Composable
 fun TextFieldCustom(
@@ -42,6 +46,20 @@ fun TextFieldCustom(
 ) {
     var textValue by remember { mutableStateOf("") }
     var isError by remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
+    val calendar = Calendar.getInstance()
+    calendar.time = Date()
+    val datePickerDialog = DatePickerDialog(
+        context,
+        { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+            textValue = "$dayOfMonth/${month + 1}/$year"
+        },
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),
+        calendar.get(Calendar.DAY_OF_MONTH)
+    )
+
     Column(modifier = modifier) {
         OutlinedTextField(
             value = textValue,
@@ -61,7 +79,7 @@ fun TextFieldCustom(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = paddingTop)
-                .clickable { if (isClickable) Log.i("Gocho", "Show calendar") },
+                .clickable { if (isClickable) datePickerDialog.show() },
             label = {
                 Text(text = stringResource(id = labelResource))
             },
