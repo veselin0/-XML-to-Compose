@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.Dp
@@ -42,7 +43,7 @@ fun TextFieldCustom(
     errorResource: Int = R.string.help_required,
     maxLength: Int? = null,
     isClickable: Boolean = false,
-    keyboardOptions: KeyboardOptions? = null ,
+    keyboardOptions: KeyboardOptions? = null,
     onValueChanged: (String) -> Unit
 ) {
     var textValue by remember { mutableStateOf("") }
@@ -87,7 +88,10 @@ fun TextFieldCustom(
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardOptions?.keyboardType ?: KeyboardType.Text,
-                capitalization = keyboardOptions?.capitalization ?: KeyboardCapitalization.Sentences
+                capitalization = keyboardOptions?.capitalization
+                    ?: KeyboardCapitalization.Sentences,
+                imeAction = if (keyboardOptions == null || keyboardOptions.imeAction == ImeAction.Default) ImeAction.Next
+                else keyboardOptions.imeAction
             ),
             leadingIcon = {
                 Icon(painter = painterResource(id = iconResource), contentDescription = null)
