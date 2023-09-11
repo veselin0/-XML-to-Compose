@@ -1,7 +1,6 @@
 package com.example.formjc.ui.components
 
 import android.app.DatePickerDialog
-import android.icu.util.Calendar
 import android.widget.DatePicker
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -27,6 +26,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.Dp
 import com.example.formjc.R
+import java.util.Calendar
 import java.util.Date
 
 
@@ -42,6 +42,7 @@ fun TextFieldCustom(
     errorResource: Int = R.string.help_required,
     maxLength: Int? = null,
     isClickable: Boolean = false,
+    keyboardOptions: KeyboardOptions? = null ,
     onValueChanged: (String) -> Unit
 ) {
     var textValue by remember { mutableStateOf("") }
@@ -54,6 +55,7 @@ fun TextFieldCustom(
         context,
         { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
             textValue = "$dayOfMonth/${month + 1}/$year"
+            onValueChanged(textValue)
         },
         calendar.get(Calendar.YEAR),
         calendar.get(Calendar.MONTH),
@@ -84,8 +86,8 @@ fun TextFieldCustom(
                 Text(text = stringResource(id = labelResource))
             },
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Text,
-                capitalization = KeyboardCapitalization.Words
+                keyboardType = keyboardOptions?.keyboardType ?: KeyboardType.Text,
+                capitalization = keyboardOptions?.capitalization ?: KeyboardCapitalization.Sentences
             ),
             leadingIcon = {
                 Icon(painter = painterResource(id = iconResource), contentDescription = null)

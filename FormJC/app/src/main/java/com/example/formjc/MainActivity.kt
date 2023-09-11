@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material.*
@@ -20,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.formjc.Utils.joinData
 import com.example.formjc.ui.components.AlertDialogContent
@@ -76,9 +79,9 @@ fun CForm(inputCallback: (String) -> Unit) {
     var surnameValue by remember { mutableStateOf("") }
     var heightValue by remember { mutableStateOf("") }
     var birthDateValue by remember { mutableStateOf("") }
-    var countryValue by remember { mutableStateOf("") }
+    val countryValue by remember { mutableStateOf("") }
     var birthPlaceValue by remember { mutableStateOf("") }
-    var noteValue by remember { mutableStateOf("") }
+    val noteValue by remember { mutableStateOf("") }
 
     if (nameValue.isEmpty() || surnameValue.isEmpty() || heightValue.isEmpty()) {
         inputCallback("")
@@ -108,14 +111,16 @@ fun CForm(inputCallback: (String) -> Unit) {
             labelResource = R.string.hint_name,
             iconResource = R.drawable.ic_person,
             maxLength = integerResource(id = R.integer.name_max_length),
-            isRequired = true
+            isRequired = true,
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words)
         ) { nameValue = it }
 
 //        Surname
         TextFieldCustom(
             labelResource = R.string.hint_surname,
             iconResource = R.drawable.ic_person,
-            isRequired = true
+            isRequired = true,
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words)
         ) { surnameValue = it }
 
         Row(
@@ -131,7 +136,8 @@ fun CForm(inputCallback: (String) -> Unit) {
                 maxLength = integerResource(id = R.integer.height_max_length),
                 isRequired = true,
                 minValue = integerResource(id = R.integer.height_min_value),
-                errorResource = R.string.help_min_height_valid
+                errorResource = R.string.help_min_height_valid,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             ) { heightValue = it }
 
 //        Birth Date
