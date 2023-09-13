@@ -20,7 +20,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.integerResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -82,7 +81,7 @@ fun CForm(inputCallback: (String) -> Unit) {
     var birthDateValue by remember { mutableStateOf("") }
     val countryValue by remember { mutableStateOf("") }
     var birthPlaceValue by remember { mutableStateOf("") }
-    val noteValue by remember { mutableStateOf("") }
+    var notesValue by remember { mutableStateOf("") }
 
     if (nameValue.isEmpty() || surnameValue.isEmpty() || heightValue.isEmpty()) {
         inputCallback("")
@@ -95,7 +94,7 @@ fun CForm(inputCallback: (String) -> Unit) {
                 birthDateValue,
                 countryValue,
                 birthPlaceValue,
-                noteValue
+                notesValue
             )
         )
     }
@@ -111,7 +110,7 @@ fun CForm(inputCallback: (String) -> Unit) {
             paddingTop = dimensionResource(id = R.dimen.common_padding_null),
             labelResource = R.string.hint_name,
             iconResource = R.drawable.ic_person,
-            maxLength = integerResource(id = R.integer.name_max_length),
+            maxLengthResource = integerResource(id = R.integer.name_max_length),
             isRequired = true,
             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words)
         ) { nameValue = it }
@@ -134,7 +133,7 @@ fun CForm(inputCallback: (String) -> Unit) {
                 modifier = Modifier.weight(40f),
                 labelResource = R.string.hint_height,
                 iconResource = R.drawable.ic_height,
-                maxLength = integerResource(id = R.integer.height_max_length),
+                maxLengthResource = integerResource(id = R.integer.height_max_length),
                 isRequired = true,
                 minValue = integerResource(id = R.integer.height_min_value),
                 errorResource = R.string.help_min_height_valid,
@@ -160,6 +159,14 @@ fun CForm(inputCallback: (String) -> Unit) {
             labelResource = R.string.hint_birth_place,
             iconResource = R.drawable.ic_place
         ) { birthPlaceValue = it }
+
+//        Notes
+        TextFieldCustom(
+            labelResource = R.string.hint_notes,
+            iconResource = R.drawable.ic_notes,
+            isSingleLine = false, maxLengthResource = R.integer.notes_max_length,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
+        ) { notesValue = it }
     }
 
 }

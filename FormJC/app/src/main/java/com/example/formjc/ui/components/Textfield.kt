@@ -14,7 +14,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -47,7 +46,7 @@ fun TextFieldCustom(
     isSingleLine: Boolean = true,
     minValue: Int = 0,
     errorResource: Int = R.string.help_required,
-    maxLength: Int? = null,
+    maxLengthResource: Int? = null,
     isClickable: Boolean = false,
     keyboardOptions: KeyboardOptions? = null,
     onValueChanged: (String) -> Unit
@@ -75,10 +74,10 @@ fun TextFieldCustom(
         OutlinedTextField(
             value = textValue,
             onValueChange = {
-                if (maxLength == null) {
+                if (maxLengthResource == null) {
                     textValue = it
                 } else {
-                    if (it.length <= maxLength) {
+                    if (it.length <= maxLengthResource) {
                         textValue = it
                     }
                 }
