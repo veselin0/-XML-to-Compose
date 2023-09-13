@@ -28,6 +28,7 @@ import com.example.formjc.Utils.joinData
 import com.example.formjc.ui.components.AlertDialogContent
 import com.example.formjc.ui.components.TextFieldCustom
 import com.example.formjc.ui.components.FormToolbar
+import com.example.formjc.ui.components.NotesMaxLengthCounter
 import com.example.formjc.ui.theme.FormJCTheme
 import kotlinx.coroutines.launch
 
@@ -164,9 +165,14 @@ fun CForm(inputCallback: (String) -> Unit) {
         TextFieldCustom(
             labelResource = R.string.hint_notes,
             iconResource = R.drawable.ic_notes,
-            isSingleLine = false, maxLengthResource = R.integer.notes_max_length,
+            isSingleLine = false,
+            maxLengthResource = integerResource(id = R.integer.notes_max_length),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
         ) { notesValue = it }
+        NotesMaxLengthCounter(
+            currentLength = notesValue.length,
+            maxLengthResource = R.integer.notes_max_length
+        )
     }
 
 }

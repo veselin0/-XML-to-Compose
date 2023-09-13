@@ -25,11 +25,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import com.example.formjc.R
 import java.util.Calendar
@@ -127,4 +129,18 @@ fun TextFieldCustom(
             )
         }
     }
+}
+
+@Composable
+fun NotesMaxLengthCounter(currentLength: Int, maxLengthResource: Int) {
+    Text(
+        text = "$currentLength/${integerResource(id = maxLengthResource)}",
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = dimensionResource(id = R.dimen.common_padding_micro)),
+        textAlign = TextAlign.End,
+        style = MaterialTheme.typography.caption,
+        color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium)
+
+    )
 }
