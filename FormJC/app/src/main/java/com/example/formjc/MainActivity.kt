@@ -46,6 +46,7 @@ class MainActivity : ComponentActivity() {
                 val coroutineScope = rememberCoroutineScope()
                 var openDialog by remember { mutableStateOf(false) }
                 var userData by remember { mutableStateOf("") }
+                var clearForm by remember { mutableStateOf(false) }
                 Scaffold(
                     scaffoldState = scaffoldState,
                     topBar = {
@@ -62,11 +63,23 @@ class MainActivity : ComponentActivity() {
                         }
                     },
                     modifier = Modifier.fillMaxSize(),
-                    content = { CForm { userData = it } }
+                    content = {
+                        CForm(clearForm = clearForm) {
+                            userData = it
+                            if (clearForm && userData.isEmpty()) {
+                                clearForm = false
+                            }
+                        }
+                    }
 
                 )
                 if (openDialog) {
-                    AlertDialogContent(content = userData, onContentChange = { openDialog = false })
+                    AlertDialogContent(
+                        content = userData,
+                        onContentChange = { clear ->
+                            openDialog = false
+                            clearForm = clear
+                        })
                 }
             }
         }
@@ -75,7 +88,7 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun CForm(inputCallback: (String) -> Unit) {
+fun CForm(clearForm: Boolean = false, inputCallback: (String) -> Unit) {
     var nameValue by remember { mutableStateOf("") }
     var surnameValue by remember { mutableStateOf("") }
     var heightValue by remember { mutableStateOf("") }
@@ -113,7 +126,8 @@ fun CForm(inputCallback: (String) -> Unit) {
             iconResource = R.drawable.ic_person,
             maxLengthResource = integerResource(id = R.integer.name_max_length),
             isRequired = true,
-            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words)
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words),
+            clearValue = clearForm
         ) { nameValue = it }
 
 //        Surname
@@ -121,7 +135,8 @@ fun CForm(inputCallback: (String) -> Unit) {
             labelResource = R.string.hint_surname,
             iconResource = R.drawable.ic_person,
             isRequired = true,
-            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words)
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words),
+            clearValue = clearForm
         ) { surnameValue = it }
 
         Row(
@@ -141,7 +156,8 @@ fun CForm(inputCallback: (String) -> Unit) {
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Done
-                )
+                ),
+                clearValue = clearForm
             ) { heightValue = it }
 
 //        Birth Date
@@ -149,7 +165,8 @@ fun CForm(inputCallback: (String) -> Unit) {
                 modifier = Modifier.weight(60f),
                 labelResource = R.string.hint_birth_date,
                 iconResource = R.drawable.ic_calendar_today,
-                isClickable = true
+                isClickable = true,
+                clearValue = clearForm
             ) { birthDateValue = it }
 
 
@@ -158,7 +175,8 @@ fun CForm(inputCallback: (String) -> Unit) {
         //        Birthplace
         TextFieldCustom(
             labelResource = R.string.hint_birth_place,
-            iconResource = R.drawable.ic_place
+            iconResource = R.drawable.ic_place,
+            clearValue = clearForm
         ) { birthPlaceValue = it }
 
 //        Notes
@@ -167,7 +185,8 @@ fun CForm(inputCallback: (String) -> Unit) {
             iconResource = R.drawable.ic_notes,
             isSingleLine = false,
             maxLengthResource = integerResource(id = R.integer.notes_max_length),
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+            clearValue = clearForm
         ) { notesValue = it }
         NotesMaxLengthCounter(
             currentLength = notesValue.length,

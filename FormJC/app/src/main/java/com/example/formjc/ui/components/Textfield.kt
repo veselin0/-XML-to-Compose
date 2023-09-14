@@ -51,10 +51,13 @@ fun TextFieldCustom(
     maxLengthResource: Int? = null,
     isClickable: Boolean = false,
     keyboardOptions: KeyboardOptions? = null,
+    clearValue: Boolean = false,
     onValueChanged: (String) -> Unit
 ) {
     var textValue by remember { mutableStateOf("") }
     var isError by remember { mutableStateOf(false) }
+
+    if (clearValue) textValue = ""
 
     val context = LocalContext.current
     val calendar = Calendar.getInstance()
