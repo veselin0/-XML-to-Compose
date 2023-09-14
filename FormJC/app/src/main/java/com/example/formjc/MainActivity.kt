@@ -29,6 +29,7 @@ import com.example.formjc.ui.components.AlertDialogContent
 import com.example.formjc.ui.components.TextFieldCustom
 import com.example.formjc.ui.components.FormToolbar
 import com.example.formjc.ui.components.NotesMaxLengthCounter
+import com.example.formjc.ui.components.SpinnerCountries
 import com.example.formjc.ui.theme.FormJCTheme
 import kotlinx.coroutines.launch
 
@@ -171,6 +172,9 @@ fun CForm(clearForm: Boolean = false, inputCallback: (String) -> Unit) {
 
 
         }
+
+//        Country
+        SpinnerCountries()
 
         //        Birthplace
         TextFieldCustom(
