@@ -30,7 +30,6 @@ import com.example.formjc.ui.components.AutocompleteTextFieldCountries
 import com.example.formjc.ui.components.TextFieldCustom
 import com.example.formjc.ui.components.FormToolbar
 import com.example.formjc.ui.components.NotesMaxLengthCounter
-import com.example.formjc.ui.components.SpinnerCountries
 import com.example.formjc.ui.theme.FormJCTheme
 import kotlinx.coroutines.launch
 
@@ -95,7 +94,7 @@ fun CForm(clearForm: Boolean = false, inputCallback: (String) -> Unit) {
     var surnameValue by remember { mutableStateOf("") }
     var heightValue by remember { mutableStateOf("") }
     var birthDateValue by remember { mutableStateOf("") }
-    val countryValue by remember { mutableStateOf("") }
+    var countryValue by remember { mutableStateOf("") }
     var birthPlaceValue by remember { mutableStateOf("") }
     var notesValue by remember { mutableStateOf("") }
 
@@ -176,7 +175,7 @@ fun CForm(clearForm: Boolean = false, inputCallback: (String) -> Unit) {
 
 //        Country
 //        SpinnerCountries()
-        AutocompleteTextFieldCountries()
+        AutocompleteTextFieldCountries() { countryValue = it }
 
         //        Birthplace
         TextFieldCustom(
