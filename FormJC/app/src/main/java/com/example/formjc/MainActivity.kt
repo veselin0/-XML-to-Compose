@@ -26,6 +26,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.formjc.Utils.joinData
 import com.example.formjc.ui.components.AlertDialogContent
+import com.example.formjc.ui.components.AutocompleteTextFieldCountries
 import com.example.formjc.ui.components.TextFieldCustom
 import com.example.formjc.ui.components.FormToolbar
 import com.example.formjc.ui.components.NotesMaxLengthCounter
@@ -174,7 +175,8 @@ fun CForm(clearForm: Boolean = false, inputCallback: (String) -> Unit) {
         }
 
 //        Country
-        SpinnerCountries()
+//        SpinnerCountries()
+        AutocompleteTextFieldCountries()
 
         //        Birthplace
         TextFieldCustom(
