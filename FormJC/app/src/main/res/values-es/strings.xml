@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Formulario JC</string>
+    <string name="dialog_OK">LImpiar</string>
+    <string name="app_bar_action_send">Enviar</string>
+    <string name="app_bar_incomplete_form">Formulario incompleto, por favor revise.</string>
+
+    <string name="dialog_cancel">Cancelar</string>
+    <string name="dialog_ok">Limpiar</string>
+    <string name="dialog_title">Datos recolectados</string>
+
+    <string name="help_min_height">Mínimo 50cm</string>
+    <string name="help_min_height_valid">Debe ser igual o mayor a 50cm</string>
+    <string name="help_required">Obligatorio</string>
+
+    <string name="hint_country">País</string>
+    <string name="hint_birth_date">Fecha de nacimiento</string>
+    <string name="hint_height">Estatura</string>
+    <string name="hint_name">Nombre</string>
+    <string name="hint_birth_place">Lugar de nacimiento</string>
+    <string name="hint_notes">Notas</string>
+    <string name="hint_surname">Apellidos</string>
+</resources>
