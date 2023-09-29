@@ -60,18 +60,7 @@ fun TextFieldCustom(
     if (clearValue) textValue = ""
 
     val context = LocalContext.current
-    val calendar = Calendar.getInstance()
-    calendar.time = Date()
-    val datePickerDialog = DatePickerDialog(
-        context,
-        { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
-            textValue = "$dayOfMonth/${month + 1}/$year"
-            onValueChanged(textValue)
-        },
-        calendar.get(Calendar.YEAR),
-        calendar.get(Calendar.MONTH),
-        calendar.get(Calendar.DAY_OF_MONTH)
-    )
+
 
     Column(modifier = modifier) {
         val keyboard = LocalSoftwareKeyboardController.current
@@ -94,7 +83,10 @@ fun TextFieldCustom(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = paddingTop)
-                .clickable { if (isClickable) datePickerDialog.show() },
+                .clickable { if (isClickable) datePickerTextField(context) {
+                    textValue = it
+                    onValueChanged(textValue)
+                } },
             label = {
                 Text(text = stringResource(id = labelResource))
             },
