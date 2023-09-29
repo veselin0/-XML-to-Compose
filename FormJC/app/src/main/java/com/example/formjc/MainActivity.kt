@@ -175,7 +175,7 @@ fun CForm(clearForm: Boolean = false, inputCallback: (String) -> Unit) {
 
 //        Country
 //        SpinnerCountries()
-        AutocompleteTextFieldCountries() { countryValue = it }
+        AutocompleteTextFieldCountries(clearValue = clearForm) { countryValue = it }
 
         //        Birthplace
         TextFieldCustom(

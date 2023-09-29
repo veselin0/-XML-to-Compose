@@ -27,9 +27,10 @@ import com.example.formjc.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AutocompleteTextFieldCountries(onValueChanged: (String) -> Unit) {
+fun AutocompleteTextFieldCountries(clearValue: Boolean = false, onValueChanged: (String) -> Unit) {
     var selectedText by remember { mutableStateOf("") }
     var isExpanded by remember { mutableStateOf(false) }
+    if (clearValue) selectedText = ""
 
     val countries = arrayOf(
         "Argentina", "Bolivia", "Chile", "Colombia", "Ecuador", "España",
