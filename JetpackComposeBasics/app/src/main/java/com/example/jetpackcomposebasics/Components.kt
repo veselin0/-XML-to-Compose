@@ -18,6 +18,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+<<<<<<< HEAD
+=======
+import androidx.compose.material.Checkbox
+>>>>>>> e71381034fa7ce27db494f96f8532676f8784085
 import androidx.compose.material.Chip
 import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
@@ -123,6 +127,7 @@ fun CustomDivider() {
 
 @Composable
 fun Components(modifier: Modifier = Modifier) {
+<<<<<<< HEAD
    Column(modifier = modifier
        .verticalScroll(rememberScrollState())
        .background(Color.Cyan)) {
@@ -165,6 +170,49 @@ fun NewChecks() {
         var isSwitchChecked by remember { mutableStateOf(false) }
         Text(text = "Announcements")
         Switch(checked = isSwitchChecked, onCheckedChange = {isSwitchChecked = it})
+=======
+    Column(modifier = modifier
+        .verticalScroll(rememberScrollState())
+        .background(Color.Cyan)) {
+        Card(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            Column(Modifier.padding(8.dp)) {
+                NewTextView()
+                CustomDivider()
+                NewTextField()
+                NewTextFieldOutlined()
+                CustomDivider()
+                NewImageView()
+                CustomDivider()
+                NewChip()
+                CustomDivider()
+                NewButton()
+                CustomDivider()
+                NewBadge()
+                CustomDivider()
+                NewChecks()
+            }
+        }
+>>>>>>> e71381034fa7ce27db494f96f8532676f8784085
+    }
+}
+
+@Composable
+fun NewChecks() {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        var isCheckboxChecked by remember { mutableStateOf(false) }
+        Checkbox(checked = isCheckboxChecked, onCheckedChange = { isCheckboxChecked = it })
+        Text(text = "Terms & Conditions")
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        var isSwitchChecked by remember { mutableStateOf(false) }
+        Text(text = "Announces")
+        Switch(checked = isSwitchChecked, onCheckedChange = { isSwitchChecked = it })
+
     }
 }
 

@@ -34,7 +34,13 @@ class MainActivity : ComponentActivity() {
 
 //                    Components()
 
+<<<<<<< HEAD
                     NewAppBars()
+=======
+//                    NewAppBars()
+
+                    NewResponsive()
+>>>>>>> e71381034fa7ce27db494f96f8532676f8784085
                 }
 
             }
